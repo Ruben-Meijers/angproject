@@ -16,6 +16,12 @@ import { ProductEditComponent } from './products/product-edit/product-edit.compo
 import { ProductService } from './products/product.service';
 import { OrderListComponent } from './order-list/order-list.component';
 import { OrderEditComponent } from './order-list/order-edit/order-edit.component';
+import { SuppliersComponent } from './suppliers/suppliers.component';
+import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
+import { SupplierItemComponent } from './suppliers/supplier-list/supplier-item/supplier-item.component';
+import { SupplierEditComponent } from './suppliers/supplier-edit/supplier-edit.component';
+import { SupplierService } from './suppliers/supplier.service';
+import { OrderListService } from './order-list/order-list.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +35,11 @@ import { OrderEditComponent } from './order-list/order-edit/order-edit.component
     ProductStartComponent,
     ProductEditComponent,
     OrderListComponent,
-    OrderEditComponent
+    OrderEditComponent,
+    SuppliersComponent,
+    SupplierListComponent,
+    SupplierItemComponent,
+    SupplierEditComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +48,7 @@ import { OrderEditComponent } from './order-list/order-edit/order-edit.component
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, SupplierService, OrderListService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

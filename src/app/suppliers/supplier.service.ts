@@ -1,71 +1,70 @@
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Subject';
-import { Product } from './product.model';
+import { Supplier } from './supplier.model';
 import { environment } from '../../environments/environment';
 import { Http, Headers, URLSearchParams } from '@angular/http';
 
 
 @Injectable()
-export class ProductService {
+export class SupplierService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  private serverUrl = environment.serverUrl + '/products'; // URL to web api
-  private products: Product[] = [];
-  productsChanged = new Subject<Product[]>();
-
+  private serverUrl = environment.serverUrl + '/suppliers'; // URL to web api
+  private suppliers: Supplier[] = [];
+  supplierChanged = new Subject<Supplier[]>();
 
   constructor(private http: Http) {}
-
- public getProducts(): Promise<Product[]> {
+  
+ public getSuppliers(): Promise<Supplier[]> {
     console.log('items ophalen van server');
     return this.http.get(this.serverUrl, { headers: this.headers })
       .toPromise()
       .then(response => {
-      this.products = response.json() as Product[];
-        return this.products;
+        this.suppliers = response.json() as Supplier[];
+        return this.suppliers;
       })
       .catch(error => {
         return this.handleError(error);
       });
   }
 
-  getProduct(index: string): Promise<Product> {
+  getSupplier(index: string): Promise<Supplier> {
     return this.http.get(this.serverUrl + '/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
-        return response.json() as Product;
+        return response.json() as Supplier;
 
       })
       .catch(error => {
-        return this.handleError('getproduct id service');
+        return this.handleError('getsupplier id service');
       });
   }
 
-  addProduct(product: Product) {
+  addSupplier(supplier: Supplier) {
 
-    const product2 = product;
+    const supplier2 = supplier;
 
-    return this.http.post(this.serverUrl , product2)
+    return this.http.post(this.serverUrl , supplier2)
       .toPromise()
       .then(response => {
-        return response.json() as Product;
+        return response.json() as Supplier;
       })
       .catch(error => {
         return this.handleError(error);
       });
   }
 
-  updateProduct(index: string, newProduct: Product) {
-    return this.http.put(this.serverUrl + '/' + index , newProduct)
+  updateSupplier(index: string, newsupplier: Supplier) {
+    return this.http.put(this.serverUrl + '/' + index , newsupplier)
       .toPromise()
       .then(response => {
-        return response.json() as Product;
+        return response.json() as Supplier;
       })
       .catch(error => {
         console.log(error);
       });
   }
 
-  deleteProduct(index: string) {
+  deleteSupplier(index: string) {
     return this.http.delete(this.serverUrl + '/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {

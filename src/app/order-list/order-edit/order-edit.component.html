@@ -1,16 +1,17 @@
 <div class="row">
   <div class="col-xs-12">
+    <h3>Here you can submit a new Order for supplyManagement</h3>
+    <h2>{{supplier?.name}}</h2>
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="name">ProductName</label>
+          <label for="name">Name Product</label>
           <input
             type="text"
             id="name"
             class="form-control"
             name="name"
             ngModel
-            required
           >
         </div>
         <div class="col-sm-2 form-group">
@@ -25,6 +26,17 @@
             pattern="^[1-9]+[0-9]*$"
           >
         </div>
+        <div class="col-sm-2 form-group">
+          <div class="row">
+            <div class="col-xs-5 col-md-offset-11">
+                <h3>hfeirheirher</h3>
+          <app-supplier-item
+            *ngFor="let supplier of suppliers; let i = index"
+            [supplier]="supplier"
+            [index]="supplier._id"></app-supplier-item>
+        </div>
+      </div>
+          </div>
       </div>
       <div class="row">
         <div class="col-xs-12">

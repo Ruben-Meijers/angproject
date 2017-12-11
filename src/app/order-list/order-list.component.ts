@@ -12,11 +12,11 @@ export class OrderListComponent implements OnInit, OnDestroy {
   orders: Order[];
   private subscription: Subscription;
 
-  constructor(private slService: OrderListService) { }
+  constructor(private oService: OrderListService) { }
 
   ngOnInit() {
-    this.orders = this.slService.getOrders();
-    this.subscription = this.slService.OrderChanged
+    this.orders = this.oService.getOrders();
+    this.subscription = this.oService.OrderChanged
       .subscribe(
         (orders: Order[]) => {
           this.orders = orders;
@@ -25,7 +25,7 @@ export class OrderListComponent implements OnInit, OnDestroy {
   }
 
   onEditItem(index: number) {
-    this.slService.startedEditing.next(index);
+    this.oService.startedEditing.next(index);
   }
 
   ngOnDestroy() {
