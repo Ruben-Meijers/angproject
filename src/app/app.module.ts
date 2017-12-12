@@ -14,14 +14,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductStartComponent } from './products/product-start/product-start.component';
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { ProductService } from './products/product.service';
-import { OrderListComponent } from './order-list/order-list.component';
-import { OrderEditComponent } from './order-list/order-edit/order-edit.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { SupplierListComponent } from './suppliers/supplier-list/supplier-list.component';
 import { SupplierItemComponent } from './suppliers/supplier-list/supplier-item/supplier-item.component';
 import { SupplierEditComponent } from './suppliers/supplier-edit/supplier-edit.component';
 import { SupplierService } from './suppliers/supplier.service';
-import { OrderListService } from './order-list/order-list.service';
+import { OrderAddComponent } from './orders/order-add/order-add.component';
+import { OrderItemComponent } from './orders/order-add/order-item/order-item.component';
+import { OrderService } from './orders/order.service';
 
 @NgModule({
   declarations: [
@@ -34,12 +34,14 @@ import { OrderListService } from './order-list/order-list.service';
     DropdownDirective,
     ProductStartComponent,
     ProductEditComponent,
-    OrderListComponent,
-    OrderEditComponent,
+    OrderAddComponent,
+    OrderItemComponent,
     SuppliersComponent,
     SupplierListComponent,
     SupplierItemComponent,
-    SupplierEditComponent
+    SupplierEditComponent,
+    OrderAddComponent,
+    OrderItemComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ import { OrderListService } from './order-list/order-list.service';
     HttpModule,
     AppRoutingModule
   ],
-  providers: [ProductService, SupplierService, OrderListService],
+  providers: [ProductService, SupplierService, OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -38,7 +38,14 @@ export class ProductEditComponent implements OnInit {
   }
 
   onSubmit() {
+    if(this.id){
+      console.log(this.id);
+    }
+    else {
+      this.id == null;
+    }
     const newProduct = new Product(
+      this.id,
       this.productForm.value['name'],
       this.productForm.value['description'],
       this.productForm.value['imagePath'],
@@ -48,7 +55,7 @@ export class ProductEditComponent implements OnInit {
     if (this.editMode) {
       this.productService.updateProduct(this.id,newProduct);
     } else {
-      this.productService.addProduct(this.productForm.value);
+      this.productService.addProduct(newProduct);
     }
     this.onCancel();
   }

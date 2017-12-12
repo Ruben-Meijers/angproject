@@ -10,10 +10,22 @@ export class ProductService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
   private serverUrl = environment.serverUrl + '/products'; // URL to web api
   private products: Product[] = [];
+  private product: Product;
   productsChanged = new Subject<Product[]>();
-
+  private prodArray: Product[] = [];
+  productsArrayChanged = new Subject<Product[]>();
 
   constructor(private http: Http) {}
+
+public getArray(){
+  return this.prodArray;
+}
+
+public addToArray(product){
+  console.log(product.name + "------naar array gestuurt----");
+  this.prodArray.push(product);
+   this.productsArrayChanged.next(this.prodArray.slice());
+}
 
  public getProducts(): Promise<Product[]> {
     console.log('items ophalen van server');
@@ -32,11 +44,26 @@ export class ProductService {
     return this.http.get(this.serverUrl + '/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
+        // let test = response.json() as Product;
+        // console.log(test._id + test.name +  "-----het product-----");
         return response.json() as Product;
 
       })
       .catch(error => {
         return this.handleError('getproduct id service');
+      });
+  }
+
+  public getProducts_In_Order(orderid): Promise<Product[]> {
+    console.log('items ophalen van server');
+    return this.http.get(this.serverUrl, { headers: this.headers })
+      .toPromise()
+      .then(response => {
+      this.products = response.json() as Product[];
+        return this.products;
+      })
+      .catch(error => {
+        return this.handleError(error);
       });
   }
 

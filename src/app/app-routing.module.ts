@@ -7,8 +7,8 @@ import { ProductDetailComponent } from './products/product-detail/product-detail
 import { ProductEditComponent } from './products/product-edit/product-edit.component';
 import { SuppliersComponent } from './suppliers/suppliers.component';
 import { SupplierEditComponent } from './suppliers/supplier-edit/supplier-edit.component';
-import { OrderListComponent } from './order-list/order-list.component';
-import { OrderEditComponent } from './order-list/order-edit/order-edit.component';
+import { OrderAddComponent } from './orders/order-add/order-add.component';
+import { OrderItemComponent } from './orders/order-add/order-item/order-item.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/products', pathMatch: 'full' },
@@ -21,8 +21,9 @@ const appRoutes: Routes = [
   { path: 'suppliers', component: SuppliersComponent, children: [
     { path: 'new', component: SupplierEditComponent },
   ] },
-  { path: 'orders', component: OrderListComponent, children: [
-    { path: 'new', component: OrderEditComponent },
+  { path: 'orders', component: OrderAddComponent, children: [
+    { path: 'new', component: OrderItemComponent },
+    {path: ':id', component:  OrderAddComponent},
   ]}];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

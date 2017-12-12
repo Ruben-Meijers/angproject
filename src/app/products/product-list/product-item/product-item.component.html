@@ -1,8 +1,10 @@
-<a
+<div class="list group">
+<div class="list group-item col-xs-3" style="width: 150px; height:auto">
+<a (click)="addtoOrder(product?._id)"
 style="cursor: pointer;"
 [routerLink]="[index]"
 routerLinkActive="active"
-class="list-group-item clearfix">
+class="list-group-item clearfix" style="display:inline-block">
 <div class="pull-left">
   <h4 class="list-group-item-heading">{{ product.name }}</h4>
   <p class="list-group-item-text">{{ product.description }}</p>
@@ -15,3 +17,5 @@ class="list-group-item clearfix">
         style="max-height: 50px;">
     </span>
 </a>
+</div>
+</div>
