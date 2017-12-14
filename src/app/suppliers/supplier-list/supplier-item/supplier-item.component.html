@@ -1,7 +1,8 @@
 <a
 style="cursor: pointer;"
-[routerLink]="[index]"
+[routerLink]= "[index]"
 routerLinkActive="active"
+(click)= "getSupplierInfoFunc(index)"
 class="list-group-item clearfix">
 <div class="pull-left">
   <h4 class="list-group-item-heading">{{ supplier.name }}</h4>

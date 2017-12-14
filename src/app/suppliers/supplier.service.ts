@@ -28,9 +28,11 @@ export class SupplierService {
   }
 
   getSupplier(index: string): Promise<Supplier> {
+    console.log("im here?" + index);
     return this.http.get(this.serverUrl + '/' + index, { headers: this.headers })
       .toPromise()
       .then(response => {
+
         return response.json() as Supplier;
 
       })

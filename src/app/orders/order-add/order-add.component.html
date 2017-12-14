@@ -6,16 +6,10 @@
           *ngFor="let product of products;"
             [product]="product"
             [index]="product._id"></app-product-item>   
-       <!-- <app-order-item></app-order-item> -->
        <div class="row">
           <div class="col-sm-2 form-group">
             <div class="row">
               <div class="col-xs-5 col-md-offset-11">
-                  <!-- <h3>Suppliers hier.....todo</h3>
-            <app-supplier-item
-              *ngFor="let supplier of suppliers; let i = index"
-              [supplier]="supplier"
-              [index]="supplier._id"></app-supplier-item> -->
           </div>
             </div>
         </div>
@@ -59,6 +53,16 @@
                   name="date"
                   ngModel
                 >
+              </div>
+              </div>
+              <div class="row col-sm-12">
+                <h3>Please add a Supplier to your order to confirm!</h3>
+                <div class="col-sm-12 form-group">
+                <app-supplier-item class="col-sm-3"
+                (getSupplierInfo)="getSupplierInfoFunc($event)"
+                *ngFor="let supplier of suppliers;"
+                [supplier]="supplier"
+                [index]="supplier.name"></app-supplier-item>
               </div>
               </div>
       <button class="btn btn-success" type="submit">Add Order</button>

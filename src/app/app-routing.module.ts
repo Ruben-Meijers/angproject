@@ -20,6 +20,7 @@ const appRoutes: Routes = [
   ] },
   { path: 'suppliers', component: SuppliersComponent, children: [
     { path: 'new', component: SupplierEditComponent },
+    // {path: ':id', component:  Supplier},
   ] },
   { path: 'orders', component: OrderAddComponent, children: [
     { path: 'new', component: OrderItemComponent },

@@ -6,6 +6,8 @@ import { OrderService } from '../order.service';
 import { Order } from '../order.model';
 import { ProductService } from '../../products/product.service';
 import { Product } from '../../products/product.model';
+import { Supplier } from '../../suppliers/supplier.model';
+import { SupplierService } from '../../suppliers/supplier.service';
 
 @Component({
   selector: 'app-order-add',
@@ -13,18 +15,20 @@ import { Product } from '../../products/product.model';
   styleUrls: ['./order-add.component.css']
 })
 export class OrderAddComponent implements OnInit, OnDestroy {
+  supplier: Supplier;
   orders: Order[];
   order: Order;
+  suppliers: Supplier[];
+  subscriptionAllSuppliers: Subscription;
   products: Product[];
   products_in_order: Product[];
   private subscription: Subscription;
   private subscriptionProduct: Subscription;
   private subscriptionAllProducts: Subscription;
-  constructor(private oService: OrderService, private prodService: ProductService) { }
+  constructor(private oService: OrderService, private prodService: ProductService, private supService: SupplierService) { }
+
 
   ngOnInit() {
-    // this.orders = this.oService.getOrders();
-
     this.subscription = this.oService.OrderChanged
       .subscribe(
         (orders: Order[]) => {
@@ -47,6 +51,19 @@ export class OrderAddComponent implements OnInit, OnDestroy {
         }
       );
       console.log(this.products_in_order+"<--- products in order");
+
+      this.subscription = this.supService.supplierChanged
+      .subscribe(
+        (suppliers: Supplier[]) => {
+          this.suppliers = suppliers;
+        }
+      );
+     this.supService.getSuppliers()
+      .then(suppliers =>{ 
+        this.suppliers = suppliers
+        console.log(this.suppliers[1].name+ "<--- objecT?");
+      })
+      .catch(error => console.log(this.suppliers));
   }
 
   onEditItem(index: number) {
@@ -62,7 +79,7 @@ export class OrderAddComponent implements OnInit, OnDestroy {
     let temporder = new Order(value._id ,value.name,
        value.description,
        value.date,
-        'steve', 
+        this.supplier[0][1], 
         this.prodService.getArray());
         this.oService.addOrder(temporder);
   }
@@ -73,5 +90,19 @@ export class OrderAddComponent implements OnInit, OnDestroy {
         this.prodService.addToArray(product);
               })
       .catch((error)=>console.log(error));
+  }
+
+  getSupplierInfoFunc(suppliername: string){
+    console.log(suppliername + "<-- dit is supplier name");
+    this.supService.getSupplier(suppliername)
+    .then((supplier)=> {
+      let suppliername = supplier[0][1];
+      console.log(supplier);
+      console.log(suppliername+ "<--- deze naam heb ik zojuist aangeklikt!");
+      this.supplier = supplier;
+
+    })
+    .catch((error)=> console.log(error));
+
   }
 }

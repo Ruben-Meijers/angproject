@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Supplier } from '../../supplier.model';
+
 
 
 @Component({
@@ -9,9 +10,15 @@ import { Supplier } from '../../supplier.model';
 })
 export class SupplierItemComponent implements OnInit {
   @Input() supplier: Supplier;
-  @Input() index: number;
+  @Input() index: string;
+  @Output() getSupplierInfo: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
   }
 
+  getSupplierInfoFunc(suppliername: string){
+    console.log("supplier item kom ik hier");
+    console.log(suppliername + "dit komt in de infofunc");
+    this.getSupplierInfo.emit(suppliername);
+}
 }
